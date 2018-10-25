@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenWidthInUnits: 16
-  minX: 1
-  maxX: 15
+  minXPos: 1
+  maxXPos: 15
 --- !u!212 &212338704193598878
 SpriteRenderer:
   m_ObjectHideFlags: 1

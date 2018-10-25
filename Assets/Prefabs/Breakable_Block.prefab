@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4000645104541938}
   - component: {fileID: 212037906124634014}
   - component: {fileID: 61744170962834288}
-  - component: {fileID: 114262182264095538}
+  - component: {fileID: 114900018104990918}
   m_Layer: 0
   m_Name: Breakable_Block
   m_TagString: Breakable
@@ -67,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6666667, y: 0.6666667}
   m_EdgeRadius: 0
---- !u!114 &114262182264095538
+--- !u!114 &114900018104990918
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,18 +75,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1256856398656586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60108bbf0b707054a969c636c4f69b81, type: 3}
+  m_Script: {fileID: 11500000, guid: f63361c0165dbae42bc0a7695f39184f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakSound: {fileID: 8300000, guid: 8492d240068c5ff459ea83cdbbda4a24, type: 3}
-  pointValue: 100
-  maxHits: 3
-  hitSprites:
-  - {fileID: 21300000, guid: 53faff310ad299e4a89ca5d46e13122c, type: 3}
-  - {fileID: 21300000, guid: 4ecfac8470051c84c876d36072e781af, type: 3}
-  - {fileID: 21300000, guid: 6cc674b12fb819641a7a4a391453f40e, type: 3}
-  currentHits: 0
-  blockParticles: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c, type: 2}
+  hitSounds:
+  - {fileID: 8300000, guid: b641055c38c8d1a4a84143d52a7949b9, type: 3}
+  - {fileID: 8300000, guid: ec0187a0d8ea31b44af955af0ac3a8ca, type: 3}
+  breakParticles: {fileID: 100000, guid: 7d846c02296ef4dc4abff04ce3e5262c, type: 2}
+  pointValue: 50
 --- !u!212 &212037906124634014
 SpriteRenderer:
   m_ObjectHideFlags: 1

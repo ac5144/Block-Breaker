@@ -188,11 +188,7 @@ MonoBehaviour:
   paddle: {fileID: 0}
   xVelocity: 5
   yVelocity: 15
-  ballSounds:
-  - {fileID: 8300000, guid: b641055c38c8d1a4a84143d52a7949b9, type: 3}
-  - {fileID: 8300000, guid: ec0187a0d8ea31b44af955af0ac3a8ca, type: 3}
-  - {fileID: 8300000, guid: 9878e22ff3b706e4688330a2862d6942, type: 3}
-  - {fileID: 8300000, guid: ae2715d71cd580a4fbb304ac09d0cf0e, type: 3}
+  randomFactor: 0.5
 --- !u!212 &212249021100257554
 SpriteRenderer:
   m_ObjectHideFlags: 1
