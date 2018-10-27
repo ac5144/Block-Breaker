@@ -15,14 +15,13 @@ public class Ball : MonoBehaviour {
 	AudioSource myAudioSource;
     Rigidbody2D myRigidbody2D;
 
-	// Use this for initialization
 	void Start () {
 
 		paddleToBallVector = transform.position - paddle.transform.position;
-        myRigidbody2D = GetComponent<Rigidbody2D> ();
+        myRigidbody2D = GetComponent<Rigidbody2D>();
+        myAudioSource = GetComponent<AudioSource>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 		if (!hasLaunched) {
@@ -32,8 +31,6 @@ public class Ball : MonoBehaviour {
 		}
 	}
 
-
-	//Other methods
 	private void LockBallToPaddle() {
 
 		Vector2 paddlePos = new Vector2 (paddle.transform.position.x, paddle.transform.position.y);
@@ -50,6 +47,13 @@ public class Ball : MonoBehaviour {
 		}
 	}
 
+    private void PlayBounceAudio(GameObject otherObject) {
+
+        if (otherObject.tag == "Wall" || hasLaunched && otherObject.tag == "Player")
+            myAudioSource.Play();
+
+    }
+
 	private void OnCollisionEnter2D(Collision2D collision) {
 
         Vector2 tweakedVelocity = new Vector2(Random.Range(0f, randomFactor), Random.Range(0f, randomFactor));
@@ -58,5 +62,7 @@ public class Ball : MonoBehaviour {
 
             myRigidbody2D.velocity += tweakedVelocity;
 		}
+
+        PlayBounceAudio(collision.gameObject);
 	}
 }

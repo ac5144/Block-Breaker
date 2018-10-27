@@ -18,13 +18,13 @@ public class StandardBlock : Block {
 
         Vector3 particlesPos = transform.position;
         particlesPos.z -= 1;
-        GameObject particles = Instantiate(breakParticles, transform.position, transform.rotation);
+        GameObject particles = Instantiate(breakParticles, particlesPos, transform.rotation);
         Destroy(particles, 1f);
     }
 
     private void DestroyBlock() {
 
-        FindObjectOfType<GameSession>().addScore(pointValue);
+        FindObjectOfType<GameSession>().AddToScore(pointValue);
 
         FindObjectOfType<LevelManager>().BlockDestroyed();
 

@@ -18,7 +18,6 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
 	void Start () {
 
         numBlocks = GameObject.FindGameObjectsWithTag("Breakable").Length;

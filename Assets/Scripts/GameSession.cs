@@ -5,16 +5,27 @@ using TMPro;
 
 public class GameSession : MonoBehaviour {
 
-    // Score Variables
     [SerializeField] int currentScore = 0;
     [SerializeField] TextMeshProUGUI scoreText;
 
-    [Range(0.1f, 2f)] [SerializeField] float gameSpeed = 1f;
+    void Awake() {
 
-    // Score Methods
-    public void addScore(int points) {
+        CheckForSingleSession();
+    }
+
+    void Start() {
+
+        UpdateScoreText();
+    }
+
+    public void AddToScore(int points) {
 
         currentScore += points;
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText() {
+
         scoreText.text = currentScore.ToString();
     }
 
@@ -23,27 +34,13 @@ public class GameSession : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    // Unity Methods
-
-    void Awake() {
+    private void CheckForSingleSession() {
 
         int controlCount = FindObjectsOfType<GameSession>().Length;
-        if (controlCount > 1) {
 
+        if (controlCount > 1)
             Destroy(gameObject);
-        }
-        else {
-
+        else
             DontDestroyOnLoad(gameObject);
-        }
-    }
-    private void Start () {
-
-        scoreText.text = currentScore.ToString();
-    }
-
-    void Update() {
-
-        Time.timeScale = gameSpeed;
     }
 }
