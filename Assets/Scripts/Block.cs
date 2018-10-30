@@ -8,6 +8,11 @@ public class Block : MonoBehaviour {
 
     protected virtual void OnCollisionEnter2D(Collision2D collision) {
 
+        PlayHitSound();
+    }
+
+    protected void PlayHitSound() {
+
         AudioClip hitSoundClip = hitSounds[Random.Range(0, hitSounds.Length)];
         AudioSource.PlayClipAtPoint(hitSoundClip, Camera.main.transform.position);
     }

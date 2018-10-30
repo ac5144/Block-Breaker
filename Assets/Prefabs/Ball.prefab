@@ -186,9 +186,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddle: {fileID: 0}
-  xVelocity: 5
-  yVelocity: 15
-  randomFactor: 0.5
+  speedFactor: 10
+  randomFactor: 1.5
+  xVelocityComp: 1
+  yVelocityComp: 1
 --- !u!212 &212249021100257554
 SpriteRenderer:
   m_ObjectHideFlags: 1

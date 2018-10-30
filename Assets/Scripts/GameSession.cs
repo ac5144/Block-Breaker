@@ -5,33 +5,36 @@ using TMPro;
 
 public class GameSession : MonoBehaviour {
 
-    [SerializeField] int currentScore = 0;
+    int currentScore = 0;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI livesText;
 
-    void Awake() {
+    const int maxNumLives = 3;
+    [SerializeField] int numLives;
+
+    // Unity Methods
+
+    private void Awake() {
 
         CheckForSingleSession();
     }
 
-    void Start() {
+    private void Start() {
 
+        ResetLives();
         UpdateScoreText();
     }
 
-    public void AddToScore(int points) {
-
-        currentScore += points;
-        UpdateScoreText();
-    }
+    // Private Methods
 
     private void UpdateScoreText() {
 
         scoreText.text = currentScore.ToString();
     }
 
-    public void ResetGame() {
+    private void UpdateLivesText() {
 
-        Destroy(gameObject);
+        livesText.text = "Lives: " + numLives.ToString();
     }
 
     private void CheckForSingleSession() {
@@ -42,5 +45,35 @@ public class GameSession : MonoBehaviour {
             Destroy(gameObject);
         else
             DontDestroyOnLoad(gameObject);
+    }
+
+    // Public Methods
+
+    public void AddToScore(int points) {
+
+        currentScore += points;
+        UpdateScoreText();
+    }
+
+    public void DecrementLives() {
+
+        numLives--;
+        UpdateLivesText();
+    }
+
+    public int GetNumLives() {
+
+        return numLives;
+    }
+
+    public void ResetLives() {
+
+        numLives = maxNumLives;
+        UpdateLivesText();
+    }
+
+    public void ResetGame() {
+
+        Destroy(gameObject);
     }
 }

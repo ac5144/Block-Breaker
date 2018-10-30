@@ -8,10 +8,14 @@ public class Paddle : MonoBehaviour {
 	[SerializeField] float minXPos = 1f;
 	[SerializeField] float maxXPos	= 15f;
 
-	void Update () {
+    // Unity Methods
+
+	private void Update () {
 
         UpdatePaddlePos();
 	}
+
+    // Private Methods
 
     private float GetMousePositionInUnits() {
 

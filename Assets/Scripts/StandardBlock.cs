@@ -6,13 +6,22 @@ public class StandardBlock : Block {
 
     [SerializeField] GameObject breakParticles;
 
-    [SerializeField] int pointValue = 50;
+    int pointValue;
+
+    // Unity Methods
+
+    private void Start() {
+
+        SetPointValue(50);
+    }
 
     protected override void OnCollisionEnter2D(Collision2D collision) {
 
         base.OnCollisionEnter2D(collision);
         DestroyBlock();
     }
+
+    // Private Methods
 
     private void TriggerBreakParticles() {
 
@@ -22,7 +31,9 @@ public class StandardBlock : Block {
         Destroy(particles, 1f);
     }
 
-    private void DestroyBlock() {
+    // Protected Methods
+
+    protected void DestroyBlock() {
 
         FindObjectOfType<GameSession>().AddToScore(pointValue);
 
@@ -30,5 +41,10 @@ public class StandardBlock : Block {
 
         TriggerBreakParticles();
         Destroy(gameObject);
+    }
+
+    protected void SetPointValue(int newValue) {
+
+        pointValue = newValue;
     }
 }

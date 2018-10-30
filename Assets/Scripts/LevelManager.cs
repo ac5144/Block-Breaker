@@ -9,19 +9,31 @@ public class LevelManager : MonoBehaviour {
 
 	SceneLoader sceneLoader;
 
-	public void BlockDestroyed() {
+    //Unity Methods
 
-		numBlocks--;
-        if (numBlocks <= 0) {
-
-            sceneLoader.LoadNextScene();
-        }
-    }
-
-	void Start () {
+	private void Start () {
 
         numBlocks = GameObject.FindGameObjectsWithTag("Breakable").Length;
 		sceneLoader = GameObject.FindObjectOfType<SceneLoader> ();
+
 	}
 
+    // Private Methods
+
+    private void LoadNextLevel() {
+
+        GameObject.FindObjectOfType<GameSession>().ResetLives();
+        sceneLoader.LoadNextScene();
+    }
+
+    // Public Methods
+
+    public void BlockDestroyed() {
+
+		    numBlocks--;
+            if (numBlocks <= 0) {
+
+                Invoke("LoadNextLevel", 0.5f);
+            }
+        }
 }

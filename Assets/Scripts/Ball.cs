@@ -5,9 +5,10 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
 
 	[SerializeField] Paddle paddle;
-	[SerializeField] float xVelocity = 5f;
-	[SerializeField] float yVelocity = 15f;
+    [SerializeField] float speedFactor = 10f;
     [SerializeField] float randomFactor = 0.2f;
+    [SerializeField] float xVelocityComp = 1f;
+    [SerializeField] float yVelocityComp = 1f;
 
 	Vector2 paddleToBallVector;
 	bool hasLaunched = false;
@@ -15,14 +16,16 @@ public class Ball : MonoBehaviour {
 	AudioSource myAudioSource;
     Rigidbody2D myRigidbody2D;
 
-	void Start () {
+    // Unity Methods
+
+	private void Start () {
 
 		paddleToBallVector = transform.position - paddle.transform.position;
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAudioSource = GetComponent<AudioSource>();
 	}
 	
-	void Update () {
+	private void Update () {
 
 		if (!hasLaunched) {
 			
@@ -31,7 +34,25 @@ public class Ball : MonoBehaviour {
 		}
 	}
 
-	private void LockBallToPaddle() {
+    private void OnCollisionEnter2D (Collision2D collision) {
+
+        TweakVelocity();
+        PlayBounceAudio(collision.gameObject);
+    }
+    
+    // Private Methods
+
+    private void TweakVelocity() {
+
+        if (hasLaunched) {
+
+            Vector2 tweakedVelocity = new Vector2(Random.Range(0f, randomFactor), Random.Range(0f, randomFactor));
+            myRigidbody2D.velocity += tweakedVelocity;
+
+        }
+    }
+
+    private void LockBallToPaddle() {
 
 		Vector2 paddlePos = new Vector2 (paddle.transform.position.x, paddle.transform.position.y);
 
@@ -41,8 +62,8 @@ public class Ball : MonoBehaviour {
 	private void LaunchOnClick() {
 
 		if (Input.GetMouseButtonDown (0)) {
-
-			myRigidbody2D.velocity = new Vector2(xVelocity, yVelocity);
+            Vector2 ballVelocity = new Vector2(xVelocityComp, yVelocityComp);
+            myRigidbody2D.velocity = ballVelocity * speedFactor;
 			hasLaunched = true;
 		}
 	}
@@ -50,19 +71,15 @@ public class Ball : MonoBehaviour {
     private void PlayBounceAudio(GameObject otherObject) {
 
         if (otherObject.tag == "Wall" || hasLaunched && otherObject.tag == "Player")
+
             myAudioSource.Play();
 
     }
 
-	private void OnCollisionEnter2D(Collision2D collision) {
+    // Public Methods
 
-        Vector2 tweakedVelocity = new Vector2(Random.Range(0f, randomFactor), Random.Range(0f, randomFactor));
-
-		if (hasLaunched) {
-
-            myRigidbody2D.velocity += tweakedVelocity;
-		}
-
-        PlayBounceAudio(collision.gameObject);
-	}
+    public void ResetBall()
+    {
+        hasLaunched = false;
+    }
 }

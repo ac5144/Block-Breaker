@@ -7,6 +7,15 @@ public class LoseCollider : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision) {
 
-		SceneManager.LoadScene ("Lose");
+        GameSession currentSession = FindObjectOfType<GameSession> ();
+
+        currentSession.DecrementLives();
+
+        if (currentSession.GetNumLives() > 0)
+
+            FindObjectOfType<Ball>().ResetBall();
+        else
+
+            SceneManager.LoadScene("Lose");
 	}
 }
